@@ -1,8 +1,6 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+<!-- Use index.ejs as a boilerplate for the head/footer requires in the HTML doc. -->
+<!DOCTYPE html>
+<html lang="en"> 
 
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
@@ -23,4 +21,12 @@ block content
     db.settings({
     timestampsInSnapshots: true
     });
+
+    db.collection("items").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data()}`);
+        });
+    });
 </script>
+
+</html>
