@@ -12,6 +12,8 @@ use Kreait\Firebase\ServiceAccount;
 
 use Kreait\Firebase\Database;
 
+use Google\Cloud\Firestore\FirestoreClient;
+
 class FirebaseController extends Controller
 
 {

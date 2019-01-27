@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html>
 <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
@@ -24,6 +24,12 @@
     </style>
 </head>
 <body>
+<%= JSON.parse(data).size %>
+<% for(var i = 0; i < JSON.parse(data).size; i++) { %>
+    <img src=<%= JSON.parse(data)[i].downloadURL %> width="480" height="270"></img>
+    <%= JSON.parse(data)[i].location.latitude %>
+    <%= JSON.parse(data)[i].location.longitude %>
+<% } %>
 
 <div id="map"></div>
 
@@ -32,6 +38,9 @@
 </footer>
 
 <script>
+    // const firebase = require("firebase");
+    // Required for side-effects
+    // require("firebase/firestore");
     function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -89,21 +98,37 @@
                 "stylers": [{"color": "#fefefe"}, {"lightness": 17}, {"weight": 1.2}]
             }]
         });
+        // alert(<%=data%>);
+        // var p = ('<%=data%>');
+        // alert(p);
+        // var markerss = [];
+        // var img, lati, lngi;
+        // var i;
+        //     for(i=0; i < parsed.length; i++){
+        //         img = parsed[i].downloadURL;
+        //         lati = parsed[i].location.latitude;
+        //         lngi = parsed[i].location.longitude;
+        //     addMarker(
+        //         { 
+        //             coords: {lat: lati, lng: lngi},
+        //             content: '<img src="'+img+'" width="200" height="300">'
+        //         }
+        //     ); 
+        // } 
 
-
-        var markers = [
-            {
-                coords: {lat: 45.5268, lng: -73.56},
-                content: '<h1>Lynn MA</h1>'
-            },
-            {
-                coords: {lat: 45.53, lng: -73.9300},
-                content: '<h1>Amesbury MA</h1>'
-            },
-            {
-                coords: {lat: 45.7762, lng: -72.0773}
-            }
-        ];
+         var markers = [
+             {
+                 coords: {lat: 45.5268, lng: -73.56},
+                 content: '<img src="https://firebasestorage.googleapis.com/v0/b/flutterapplication-dbfb7.appspot.com/o/bcd2ac00-0b50-11e9-caab-2f358782f081.jpg?alt=media&token=9006be84-eead-4e58-9129-329cdb78c31e>"'
+             },
+             {
+                 coords: {lat: 45.53, lng: -73.9300},
+                 content: '<h1>Amesbury MA</h1>'
+             },
+             {
+                 coords: {lat: 45.7762, lng: -72.0773}
+             }]
+        ;
 
         // Loop through markers
         for (var i = 0; i < markers.length; i++) {

@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/firebase', array(
     'uses' => 'FirebaseController@index'
 ));
+
+Route::get('/firestore', array(
+    'uses' => 'FireStore@index'
+));

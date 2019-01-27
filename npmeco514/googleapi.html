@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html>
 <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
@@ -30,8 +30,12 @@
 <footer class="w3-container w3-center mx-auto" style="background-color: #f7f7f7">
     <img src="E311_Logo.png">
 </footer>
-
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
 <script>
+    const firebase = require("firebase");
+    // Required for side-effects
+    require("firebase/firestore");
     function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
