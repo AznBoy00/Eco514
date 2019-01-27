@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Map</title>
+    <title><%=title %></title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -24,12 +24,6 @@
     </style>
 </head>
 <body>
-<%= JSON.parse(data).size %>
-<% for(var i = 0; i < JSON.parse(data).size; i++) { %>
-    <img src=<%= JSON.parse(data)[i].downloadURL %> width="480" height="270"></img>
-    <%= JSON.parse(data)[i].location.latitude %>
-    <%= JSON.parse(data)[i].location.longitude %>
-<% } %>
 
 <div id="map"></div>
 
@@ -98,36 +92,31 @@
                 "stylers": [{"color": "#fefefe"}, {"lightness": 17}, {"weight": 1.2}]
             }]
         });
-        // alert(<%=data%>);
-        // var p = ('<%=data%>');
-        // alert(p);
-        // var markerss = [];
-        // var img, lati, lngi;
-        // var i;
-        //     for(i=0; i < parsed.length; i++){
-        //         img = parsed[i].downloadURL;
-        //         lati = parsed[i].location.latitude;
-        //         lngi = parsed[i].location.longitude;
-        //     addMarker(
-        //         { 
-        //             coords: {lat: lati, lng: lngi},
-        //             content: '<img src="'+img+'" width="200" height="300">'
-        //         }
-        //     ); 
-        // } 
-         var markers = [
-             {
-                 coords: {lat: <%= JSON.parse(data)[0].location.latitude %>, lng: <%= JSON.parse(data)[0].location.longitude %>},
-                 content: '<p><img src=<%= JSON.parse(data)[0].downloadURL %> width="480" height="270"></img></p></br><%= JSON.parse(data)[0].labels %>',
-             },
-             ]
-        ;
-
-        // Loop through markers
-        for (var i = 0; i < markers.length; i++) {
-            // Add marker
-            addMarker(markers[i]);
+        alert(<%=rawdata.length%>);
+        for(i=0; i < <%=rawdata.length%>; i++){
+                img = parsed[i].downloadURL;
+                lati = parsed[i].location.latitude;
+                lngi = parsed[i].location.longitude;
+            addMarker(
+                { 
+                    coords: {lat: lati, lng: lngi},
+                    content: '<img src="'+img+'" width="200" height="300">'
+                }
+            ); 
         }
+
+        // var markers = [
+        //     {
+        //          coords: {lat: <%= JSON.parse(data)[0].location.latitude %>, lng: <%= JSON.parse(data)[0].location.longitude %>},
+        //          content: '<p><img src=<%= JSON.parse(data)[0].downloadURL %> width="480" height="270"></img></p></br><%= JSON.parse(data)[0].labels %>',
+        //      }
+        //      ];
+
+        // // Loop through markers
+        // for (var i = 0; i < markers.length; i++) {
+        //     // Add marker
+        //     addMarker(markers[i]);
+        // }
 
         // Add Marker Function
         function addMarker(props) {
@@ -136,13 +125,11 @@
                 icon: 'icon.png',
                 map: map,
             });
-
             // Check content
             if (props.content) {
                 var infoWindow = new google.maps.InfoWindow({
                     content: props.content
                 });
-
                 marker.addListener('click', function () {
                     infoWindow.open(map, marker);
                 });

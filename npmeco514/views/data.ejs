@@ -4,10 +4,12 @@
     <title>Title</title>
 </head>
 <body>
-    <body>
-        <h1>Checking</h1>
-        <% console.log('This is my data ' + JSON.parse(data)[0].downloadURL); %>
-        
-    
+<a class="nav-link my-md-2 my-1" href="/">Home</a>
+<% for(var i = 0; i < rawdata.length; i++) { %>
+    <img src=<%= JSON.parse(data)[i].downloadURL %> width="480" height="270"></img>
+    <%= JSON.parse(data)[i].labels %>
+    <%= JSON.parse(data)[i].location.latitude %>
+    <%= JSON.parse(data)[i].location.longitude %>
+<% } %>
 
 </body>
