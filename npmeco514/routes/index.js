@@ -13,13 +13,13 @@ var config = {
 firebase.initializeApp(config);
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// /* GET home page. */
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 /* GET home page. */
-router.get('/data', async function(req, res, next) {
+router.get('/', async function(req, res, next) {
   try {
       // Initialize Cloud Firestore through Firebase
       var db = firebase.firestore();
@@ -27,26 +27,28 @@ router.get('/data', async function(req, res, next) {
       let labels;
       let location;
       let allData = [];
-      console.log("FireBase DB Initialized");
+      // console.log("FireBase DB Initialized");
       // Disable deprecated features
       db.settings({
           timestampsInSnapshots: true
       });
 
       let data = await db.collection('items').get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            console.log(doc.data());
-            allData.push(doc.data());
-          });
-        })
-        .catch((err) => {
-          console.log('Error getting documents', err);
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          // console.log(doc.data());
+          allData.push(doc.data());
         });
-        console.log("Show me the data", allData);
-        console.log("Show me the top of the list !!!", allData[0]);
-        console.log("Show me the latitude", allData[0]['location']['latitude']);
-      res.render('data', { title: 'All Data', data:data, URL:URL, labels:labels, location:location});
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err);
+      });
+
+      // console.log("Show me the data", allData);
+      // console.log("Show me the top of the list !!!", allData[0]);
+      // console.log("Show me the latitude", allData[0]['location']['latitude']);
+      res.render('index', {"data": JSON.stringify(allData)});
+      // res.render('index', { title: 'Express' });
   } catch (err) {
       console.error(err);
       res.render('error', { error: err });
