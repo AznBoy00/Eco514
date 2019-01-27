@@ -44,20 +44,10 @@ class FirebaseController extends Controller
 //
 //            ]);
 
-//$newPost->getKey(); // => -KVr5eu8gcTv7_AHb-3-
+        $child = $database->getReference('TEST')->getChildKeys();
+        $data = $database->getReference('TEST')->getValue();
 
-//$newPost->getUri(); // => https://my-project.firebaseio.com/blog/posts/-KVr5eu8gcTv7_AHb-3-
-
-//$newPost->getChild('title')->set('Changed post title');
-
-//$newPost->getValue(); // Fetches the data from the realtime database
-
-//$newPost->remove();
-        //$database->getReference('TEST')->getChild('body')->set('ASD');
-
-        $data = $database->getReference()->getValue();
-
-        return view('firebase', ["data" => $data]);
+        return view('firebase', ["data" => $data, "child" => $child]);
 
     }
 
