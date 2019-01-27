@@ -15,4 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/phpfirebase_sdk','FirebaseController@index');
+
+Route::get('/firebase', array(
+    'uses' => 'FirebaseController@index'
+));

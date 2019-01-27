@@ -32,17 +32,17 @@ class FirebaseController extends Controller
 
         $database = $firebase->getDatabase();
 
-        $newPost = $database
-
-            ->getReference('blog/posts')
-
-            ->push([
-
-                'title' => 'Post title',
-
-                'body' => 'This should probably be longer.'
-
-            ]);
+//        $newPost = $database
+//
+//            ->getReference('TEST')
+//
+//            ->push([
+//
+//                'title' => 'TITLE',
+//
+//                'body' => 'BODY'
+//
+//            ]);
 
 //$newPost->getKey(); // => -KVr5eu8gcTv7_AHb-3-
 
@@ -53,10 +53,11 @@ class FirebaseController extends Controller
 //$newPost->getValue(); // Fetches the data from the realtime database
 
 //$newPost->remove();
+        //$database->getReference('TEST')->getChild('body')->set('ASD');
 
-        echo"<pre>";
+        $data = $database->getReference()->getValue();
 
-        print_r($newPost->getvalue());
+        return view('firebase', ["data" => $data]);
 
     }
 
