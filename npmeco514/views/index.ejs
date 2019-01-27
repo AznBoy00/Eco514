@@ -115,19 +115,13 @@
         //         }
         //     ); 
         // } 
-
+        alert(<%= JSON.parse(data) %>);
          var markers = [
              {
-                 coords: {lat: 45.5268, lng: -73.56},
-                 content: '<img src="https://firebasestorage.googleapis.com/v0/b/flutterapplication-dbfb7.appspot.com/o/bcd2ac00-0b50-11e9-caab-2f358782f081.jpg?alt=media&token=9006be84-eead-4e58-9129-329cdb78c31e>"'
+                 coords: {lat: <%= JSON.parse(data)[0].location.latitude %>, lng: <%= JSON.parse(data)[0].location.longitude %>},
+                 content: '<p><img src=<%= JSON.parse(data)[0].downloadURL %> width="480" height="270"></img></p></br><%= JSON.parse(data)[0].labels %>',
              },
-             {
-                 coords: {lat: 45.53, lng: -73.9300},
-                 content: '<h1>Amesbury MA</h1>'
-             },
-             {
-                 coords: {lat: 45.7762, lng: -72.0773}
-             }]
+             ]
         ;
 
         // Loop through markers
