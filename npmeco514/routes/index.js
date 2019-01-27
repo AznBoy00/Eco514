@@ -19,23 +19,30 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/data', function(req, res, next) {
+router.get('/data', async function(req, res, next) {
   try {
       // Initialize Cloud Firestore through Firebase
       var db = firebase.firestore();
-      
+      let URL;
+      let labels;
+      let location;
+
       // Disable deprecated features
       db.settings({
           timestampsInSnapshots: true
       });
-      
-      let data = db.collection("items").get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-              console.log(`${doc.id} => ${doc.data()}`);
-          });
-      });
 
-      res.render('data', { title: 'All Data', data:data});
+      let data = await db.collection('items').get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            console.log(doc.data());
+          });
+        })
+        .catch((err) => {
+          console.log('Error getting documents', err);
+        });
+
+      res.render('data', { title: 'All Data', data:data, URL:URL, labels:labels, location:location});
   } catch (err) {
       console.error(err);
       res.render('error', { error: err });
