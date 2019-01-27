@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 91%;
+            padding-left: 20px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+
+
+<footer class="w3-container w3-teal w3-center mx-auto">
+    <br>
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p></p>
+</footer>
+
+<script>
+    function initMap(){
+        // Map options
+        var options = {
+            zoom:8,
+            center:{lat:45.52,lng:-73.05689}
+        }
+
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+        var markers = [
+            {
+                coords:{lat:45.5268,lng:-73.56},
+                content:'<h1>Lynn MA</h1>'
+            },
+            {
+                coords:{lat:45.53,lng:-73.9300},
+                content:'<h1>Amesbury MA</h1>'
+            },
+            {
+                coords:{lat:45.7762,lng:-72.0773}
+            }
+        ];
+
+        // Loop through markers
+        for(var i = 0;i < markers.length;i++){
+            // Add marker
+            addMarker(markers[i]);
+        }
+
+        // Add Marker Function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position:props.coords,
+                iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                map:map,
+            });
+
+            // Check for customicon
+            if(props.iconImage){
+                // Set icon image
+                marker.setIcon(props.iconImage);
+            }
+
+            // Check content
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                    content:props.content
+                });
+
+                marker.addListener('click', function(){
+                    infoWindow.open(map, marker);
+                });
+            }
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIhGjgq975slKa9UMyceuRNVp_5G1o0xE&callback=initMap"
+        async defer></script>
+</body>
+</html>
