@@ -148,9 +148,14 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future<void> _addItem(String downloadURL, List<String> labels) async {
+    var currentLocation = <String, double>{};
+    var location = new Location();
+    currentLocation = await location.getLocation();
+    
     await Firestore.instance.collection('items').add(<String, dynamic> {
       'downloadURL': downloadURL,
-      'labels': labels
+      'labels': labels,
+      'location':currentLocation,
     });
   }
 
