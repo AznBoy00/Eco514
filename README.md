@@ -1,4 +1,4 @@
-# ProjectLionBird
+# Eco514
 
 Camera App using Flutter used to report an environmental/infrastructure issue to a server platform using HTML/JS.
 
